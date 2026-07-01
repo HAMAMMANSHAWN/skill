@@ -40,6 +40,19 @@ ln -s ../.agents/skills .claude/skills
 
 > 把 `/Users/project/Github/skill/skills/pdf` 软链接到当前项目的 `.agents/skills/pdf`；如果 `.claude/skills` 不存在，再创建指向 `../.agents/skills` 的软链接。不要覆盖已有文件。
 
+## 用一个引导 Skill 冷启动
+
+如果项目一开始还不知道需要哪些 Skill，可以只启用 `project-skill-bootstrap`。它采用两段式流程：
+
+1. 当前会话分析项目目标与文件，只生成 `.agents/skill-plan.md`，不安装其他 Skill。
+2. 用户确认方案后，计划状态变为 `approved`。
+3. 新会话读取计划，先 dry-run，再建立获批的项目级软链接并验证。
+4. 再开一个干净会话执行正式任务，使上下文只包含真正需要的 Skill。
+
+跨会话信息必须写入计划文件，不能依赖上一段聊天记录。引导 Skill 自带的脚本默认只预览；必须显式添加 `--apply` 才会创建链接，并且遇到任何已有文件或冲突链接都会停止。
+
+也可以完全不全局安装引导 Skill：在项目 `AGENTS.md` 中注明先读取 `/Users/project/Github/skill/skills/project-skill-bootstrap/SKILL.md`。若希望任何新项目都能自然触发，可只把这一个体积很小的引导 Skill 作为全局例外。
+
 ## 与现有全局软链接结合
 
 本机原有配置并不需要一次性推倒重来。推荐采用平滑迁移：

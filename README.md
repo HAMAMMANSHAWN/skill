@@ -1,6 +1,6 @@
 # Skill Library
 
-这是个人使用的 Agent Skills 集中仓库，当前收录 33 个用户级 Skill。Skill 原件统一保存在 [`skills/`](skills/) 中；具体项目只通过软链接启用所需 Skill，避免全局安装过多 Skill 占用上下文并造成误触发。
+这是个人使用的 Agent Skills 集中仓库，当前收录 34 个用户级 Skill。Skill 原件统一保存在 [`skills/`](skills/) 中；具体项目只通过软链接启用所需 Skill，避免全局安装过多 Skill 占用上下文并造成误触发。
 
 ## 内容
 
@@ -19,3 +19,5 @@ ln -s ../.agents/skills /path/to/project/.claude/skills
 ```
 
 建议让 Agent 代为执行，并要求它在创建前检查目标是否已存在。
+
+新项目可以只启用 `project-skill-bootstrap`：它会先生成 `.agents/skill-plan.md`，待用户确认后再按需链接其他 Skill，并把执行提示留给下一个会话。

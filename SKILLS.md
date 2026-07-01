@@ -1,6 +1,6 @@
 # Skills 清单
 
-本仓库当前收录 33 个用户级 Skill。`本地`表示原先直接安装在 `~/.codex/skills`；`cc-switch` 表示原先由该目录中的软链接指向 `~/.cc-switch/skills`。迁入本仓库后，`skills/<name>` 均为可独立使用的完整原件。
+本仓库当前收录 34 个用户级 Skill。`本地`表示原先直接安装在 `~/.codex/skills`；`cc-switch` 表示原先由该目录中的软链接指向 `~/.cc-switch/skills`；`本仓库`表示迁移过程中创建并由本仓库维护。迁入本仓库后，`skills/<name>` 均为可独立使用的完整原件。
 
 ## 搜索、浏览器与自动化
 
@@ -62,6 +62,7 @@
 | Skill | 用途 | 原来源 |
 | --- | --- | --- |
 | `mcp-builder` | 使用 Python 或 TypeScript 构建 MCP Server | cc-switch |
+| `project-skill-bootstrap` | 分析项目所需能力，生成跨会话计划，并在批准后安全创建项目级 Skill 链接 | 本仓库 |
 | `skill-creator` | 创建或更新高质量 Agent Skill | cc-switch |
 | `template` | Skill 目录占位模板，描述尚未填写，不建议直接启用 | cc-switch |
 

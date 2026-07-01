@@ -11,6 +11,8 @@
 3. 涉及安装、迁移、更新或删除时，先阅读 `docs/项目级-Skills-管理指南.md`。
 4. 使用某个 Skill 时，必须完整阅读对应的 `skills/<name>/SKILL.md`，再按其中说明操作。
 
+新项目尚未选择 Skill 时，优先使用 `skills/project-skill-bootstrap/SKILL.md` 生成可跨会话读取的计划；规划阶段不得同时安装其他 Skill。
+
 ## 修改约定
 
 - 不要把 Skill 复制到业务项目；从业务项目的 `.agents/skills/<name>` 创建指向本仓库原件的软链接。
