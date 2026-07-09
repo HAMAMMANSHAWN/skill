@@ -18,6 +18,7 @@ Agent 的上下文窗口有限。即使 Skill 默认只暴露名称和描述，�
 
 ~/Github/my-project/
 ├── .agents/skills/         # 项目启用列表（软链接）
+├── .codex/skills           # 指向 ../.agents/skills
 └── .claude/skills          # 指向 ../.agents/skills
 ```
 
@@ -30,15 +31,17 @@ Agent 的上下文窗口有限。即使 Skill 默认只暴露名称和描述，�
 ```bash
 mkdir -p .agents/skills
 ln -s /Users/project/Github/skill/skills/pdf .agents/skills/pdf
+mkdir -p .codex
+ln -s ../.agents/skills .codex/skills
 mkdir -p .claude
 ln -s ../.agents/skills .claude/skills
 ```
 
-如果 `.claude/skills` 已存在，不要覆盖；先用 `ls -la .claude/skills` 判断它是目录还是软链接。Codex 可直接读取 `.agents/skills`；Claude Code 通过 `.claude/skills` 使用同一组 Skill。
+如果 `.codex/skills` 或 `.claude/skills` 已存在，不要覆盖；先用 `ls -la` 判断它是目录还是软链接。Codex 可通过 `.codex/skills` 使用同一组 Skill；Claude Code 通过 `.claude/skills` 使用同一组 Skill。
 
 也可以直接对 Agent 说：
 
-> 把 `/Users/project/Github/skill/skills/pdf` 软链接到当前项目的 `.agents/skills/pdf`；如果 `.claude/skills` 不存在，再创建指向 `../.agents/skills` 的软链接。不要覆盖已有文件。
+> 把 `/Users/project/Github/skill/skills/pdf` 软链接到当前项目的 `.agents/skills/pdf`；如果 `.codex/skills` 或 `.claude/skills` 不存在，再创建指向 `../.agents/skills` 的软链接。不要覆盖已有文件。
 
 ## 用一个引导 Skill 冷启动
 
@@ -63,7 +66,7 @@ Cursor 不直接消费 Codex Skill 列表，推荐用项目 Rules 引导它读�
 /Users/project/Github/skill/scripts/sync-cursor-project-skill-bootstrap.sh --apply "$PWD"
 ```
 
-它会为当前项目创建 `.cursor/rules/project-skill-bootstrap.mdc`、`.cursor/rules/project-skill-bootstrap/RULE.md`、`.cursor/skills/project-skill-bootstrap`、`.agents/skills/project-skill-bootstrap` 和 `.claude/skills`。详细说明见 `docs/Cursor-Skill-同步指南.md`。
+它会为当前项目创建 `.cursor/rules/project-skill-bootstrap.mdc`、`.cursor/rules/project-skill-bootstrap/RULE.md`、`.cursor/skills/project-skill-bootstrap`、`.agents/skills/project-skill-bootstrap`、`.codex/skills` 和 `.claude/skills`。详细说明见 `docs/Cursor-Skill-同步指南.md`。
 
 ## 与现有全局软链接结合
 
@@ -77,6 +80,7 @@ Cursor 不直接消费 Codex Skill 列表，推荐用项目 Rules 引导它读�
 
 迁移完成（推荐）
 项目/.agents/skills/<name> ─────> /Users/project/Github/skill/skills/<name>
+项目/.codex/skills ─────────────> ../.agents/skills
 项目/.claude/skills ────────────> ../.agents/skills
 ```
 

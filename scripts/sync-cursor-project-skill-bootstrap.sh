@@ -6,7 +6,7 @@ usage() {
 Usage:
   sync-cursor-project-skill-bootstrap.sh [--apply] [PROJECT_ROOT]
 
-Installs project-local Cursor Rule entrypoints for the central
+Installs project-local Cursor, Codex, and Claude entrypoints for the central
 project-skill-bootstrap Skill. Without --apply, prints the planned changes.
 
 Creates:
@@ -14,6 +14,7 @@ Creates:
   PROJECT_ROOT/.cursor/rules/project-skill-bootstrap -> central RULE.md folder
   PROJECT_ROOT/.cursor/skills/project-skill-bootstrap -> central Skill source
   PROJECT_ROOT/.agents/skills/project-skill-bootstrap -> central Skill source
+  PROJECT_ROOT/.codex/skills -> ../.agents/skills
   PROJECT_ROOT/.claude/skills -> ../.agents/skills
 USAGE
 }
@@ -110,7 +111,7 @@ ensure_symlink() {
 }
 
 if [[ "$apply" == true ]]; then
-  mkdir -p "$project_root/.cursor/rules" "$project_root/.cursor/skills" "$project_root/.agents/skills" "$project_root/.claude"
+  mkdir -p "$project_root/.cursor/rules" "$project_root/.cursor/skills" "$project_root/.agents/skills" "$project_root/.codex" "$project_root/.claude"
 else
   echo "Dry run for project: $project_root"
   echo "Use --apply to create links."
@@ -120,6 +121,7 @@ ensure_symlink "$cursor_mdc_source" "$project_root/.cursor/rules/project-skill-b
 ensure_symlink "$cursor_rule_source" "$project_root/.cursor/rules/project-skill-bootstrap"
 ensure_symlink "$skill_source" "$project_root/.cursor/skills/project-skill-bootstrap"
 ensure_symlink "$skill_source" "$project_root/.agents/skills/project-skill-bootstrap"
+ensure_symlink "../.agents/skills" "$project_root/.codex/skills"
 ensure_symlink "../.agents/skills" "$project_root/.claude/skills"
 
 if [[ "$apply" == true ]]; then
@@ -127,5 +129,6 @@ if [[ "$apply" == true ]]; then
   test -f "$project_root/.cursor/rules/project-skill-bootstrap/RULE.md"
   test -f "$project_root/.cursor/skills/project-skill-bootstrap/SKILL.md"
   test -f "$project_root/.agents/skills/project-skill-bootstrap/SKILL.md"
-  echo "Cursor project Skill bootstrap sync complete."
+  test -f "$project_root/.codex/skills/project-skill-bootstrap/SKILL.md"
+  echo "Project Skill bootstrap sync complete."
 fi

@@ -44,7 +44,7 @@ The plan file is the cross-session handoff. Do not rely on chat history.
 2. Confirm every selected Skill exists under `<library>/skills/<name>/SKILL.md`.
 3. Run `scripts/link-skills.sh <project-root> <skill>...` without `--apply` and review the dry run.
 4. Run the same command with `--apply` only when the dry run matches the approved plan.
-5. Verify every link and ensure `.claude/skills` points to `../.agents/skills` when that entry was absent.
+5. Verify every link and ensure `.codex/skills` and `.claude/skills` point to `../.agents/skills` when those entries were absent.
 6. Set the plan to `status: installed`, record the installation date, and add verification results.
 7. Tell the user to start a fresh conversation so only the newly linked Skills enter the next task context.
 

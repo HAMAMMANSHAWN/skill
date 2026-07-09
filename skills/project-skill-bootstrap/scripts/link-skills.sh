@@ -32,7 +32,11 @@ same_target() {
     current_abs=$(cd "$link_dir" && cd "$(dirname "$current")" && pwd -P)/$(basename "$current")
   fi
 
-  expected_abs=$(cd "$(dirname "$expected_target")" && pwd -P)/$(basename "$expected_target")
+  if [[ "$expected_target" = /* ]]; then
+    expected_abs=$(cd "$(dirname "$expected_target")" && pwd -P)/$(basename "$expected_target")
+  else
+    expected_abs=$(cd "$link_dir" && cd "$(dirname "$expected_target")" && pwd -P)/$(basename "$expected_target")
+  fi
   [[ "$current_abs" == "$expected_abs" ]]
 }
 
@@ -67,13 +71,21 @@ for skill in "$@"; do
   done
 done
 
+codex_entry="$project_root/.codex/skills"
 claude_entry="$project_root/.claude/skills"
-if [[ -e "$claude_entry" || -L "$claude_entry" ]]; then
-  if [[ ! -L "$claude_entry" || "$(readlink "$claude_entry")" != "../.agents/skills" ]]; then
-    echo "Conflicting Claude Skills entry: $claude_entry" >&2
-    exit 1
+for entry_name in Codex Claude; do
+  if [[ "$entry_name" == "Codex" ]]; then
+    entry="$codex_entry"
+  else
+    entry="$claude_entry"
   fi
-fi
+  if [[ -e "$entry" || -L "$entry" ]]; then
+    if [[ ! -L "$entry" ]] || ! same_target "$entry" "../.agents/skills"; then
+      echo "Conflicting $entry_name Skills entry: $entry" >&2
+      exit 1
+    fi
+  fi
+done
 
 if ! $apply; then
   echo "Dry run; no files changed."
@@ -89,6 +101,9 @@ if ! $apply; then
       echo "LINK $project_root/.cursor/skills/$skill -> $skills_root/$skill"
     fi
   done
+  if [[ ! -L "$codex_entry" ]]; then
+    echo "LINK $codex_entry -> ../.agents/skills"
+  fi
   if [[ ! -L "$claude_entry" ]]; then
     echo "LINK $claude_entry -> ../.agents/skills"
   fi
@@ -96,7 +111,7 @@ if ! $apply; then
   exit 0
 fi
 
-mkdir -p "$project_root/.agents/skills" "$project_root/.cursor/skills" "$project_root/.claude"
+mkdir -p "$project_root/.agents/skills" "$project_root/.cursor/skills" "$project_root/.codex" "$project_root/.claude"
 for skill in "$@"; do
   if [[ ! -L "$project_root/.agents/skills/$skill" ]]; then
     ln -s "$skills_root/$skill" "$project_root/.agents/skills/$skill"
@@ -108,6 +123,10 @@ for skill in "$@"; do
   test -f "$project_root/.cursor/skills/$skill/SKILL.md"
   echo "Linked $skill"
 done
+if [[ ! -L "$codex_entry" ]]; then
+  ln -s ../.agents/skills "$codex_entry"
+  echo "Linked .codex/skills"
+fi
 if [[ ! -L "$claude_entry" ]]; then
   ln -s ../.agents/skills "$claude_entry"
   echo "Linked .claude/skills"

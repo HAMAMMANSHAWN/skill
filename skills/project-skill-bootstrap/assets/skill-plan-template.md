@@ -35,6 +35,7 @@ Describe the intended outcome and primary deliverables.
 - [ ] Every selected target contains `SKILL.md`
 - [ ] Every `.agents/skills/<name>` entry is a symlink to the central library
 - [ ] Every `.cursor/skills/<name>` entry is a symlink to the central library when Cursor compatibility is needed
+- [ ] `.codex/skills` resolves to `.agents/skills` when Codex compatibility is needed
 - [ ] `.claude/skills` resolves to `.agents/skills`
 
 ## Next-conversation prompt

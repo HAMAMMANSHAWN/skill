@@ -18,4 +18,5 @@ Cursor Rules are not the Skill source of truth. The source of truth remains:
 Keep project Skill links local:
 
 - `.agents/skills/<name>` should point to `/Users/project/Github/skill/skills/<name>`.
+- `.codex/skills` should point to `../.agents/skills` when Codex compatibility is needed.
 - `.claude/skills` should point to `../.agents/skills` when Claude Code compatibility is needed.

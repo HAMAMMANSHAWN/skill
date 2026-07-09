@@ -1,6 +1,6 @@
 # Cursor Skill 同步指南
 
-Cursor 没有直接读取 Codex `Skill` 的同名机制；它的稳定入口是 Rules。为了让 Cursor 打开项目时也能使用本仓库的 `project-skill-bootstrap`，本仓库提供 Cursor Rules 模板，并把它们软链接到业务项目。
+Cursor 有自己的 Skills 入口，也支持 Rules。为了让 Cursor 打开项目时稳定使用本仓库的 `project-skill-bootstrap`，本仓库同时提供 Cursor Rules 模板、Cursor 项目 Skill 入口，并补齐 Codex/Claude 兼容入口。
 
 ## 同步到当前项目
 
@@ -17,6 +17,7 @@ Cursor 没有直接读取 Codex `Skill` 的同名机制；它的稳定入口是 
 .cursor/rules/project-skill-bootstrap -> /Users/project/Github/skill/templates/cursor/project-skill-bootstrap
 .cursor/skills/project-skill-bootstrap -> /Users/project/Github/skill/skills/project-skill-bootstrap
 .agents/skills/project-skill-bootstrap -> /Users/project/Github/skill/skills/project-skill-bootstrap
+.codex/skills -> ../.agents/skills
 .claude/skills -> ../.agents/skills
 ```
 
