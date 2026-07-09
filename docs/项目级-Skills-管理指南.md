@@ -53,6 +53,8 @@ ln -s ../.agents/skills .claude/skills
 
 也可以完全不全局安装引导 Skill：在项目 `AGENTS.md` 中注明先读取 `/Users/project/Github/skill/skills/project-skill-bootstrap/SKILL.md`。若希望任何新项目都能自然触发，可只把这一个体积很小的引导 Skill 作为全局例外。
 
+如果用户已经明确说“安装 / 链接 / 启用某个 Skill 到当前项目”，这句话本身就是对这些具名 Skill 的批准。Agent 应创建或更新 `.agents/skill-plan.md` 记录批准，再 dry-run 和安装；不要要求用户复述固定批准口令。若用户不记得 Skill 名称，先从 `SKILLS.md` 列出可选项或推荐最小集合，再等待用户选择。
+
 ## Cursor 项目接入
 
 Cursor 不直接消费 Codex Skill 列表，推荐用项目 Rules 引导它读取本仓库的 Skill 原件。当前仓库提供同步脚本：
