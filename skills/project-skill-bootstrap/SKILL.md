@@ -7,6 +7,8 @@ description: Analyze a project's goals and files, select the smallest useful set
 
 Use `/Users/project/Github/skill` as the default library. Resolve another library only when the project instructions or user specify one.
 
+This Skill is the sole recommended global exception. Keep it linked under `~/.cursor/skills/project-skill-bootstrap` and `~/.agents/skills/project-skill-bootstrap` so new projects can invoke it without a project-local install first. Use `scripts/install-global-bootstrap.sh --apply` to create those links. Do not globally install other Skills from the library.
+
 ## Choose the phase
 
 - **Plan**: Analyze and write `.agents/skill-plan.md`. Do not create or remove Skill links.

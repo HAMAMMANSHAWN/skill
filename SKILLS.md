@@ -62,7 +62,7 @@
 | Skill | 用途 | 原来源 |
 | --- | --- | --- |
 | `mcp-builder` | 使用 Python 或 TypeScript 构建 MCP Server | cc-switch |
-| `project-skill-bootstrap` | 分析项目所需能力，生成跨会话计划，并在批准后安全创建项目级 Skill 链接 | 本仓库 |
+| `project-skill-bootstrap` | 分析项目所需能力，生成跨会话计划，并在批准后安全创建项目级 Skill 链接；唯一建议常驻全局的引导 Skill（`install-global-bootstrap.sh`） | 本仓库 |
 | `skill-creator` | 创建或更新高质量 Agent Skill | cc-switch |
 | `template` | Skill 目录占位模板，描述尚未填写，不建议直接启用 | cc-switch |
 

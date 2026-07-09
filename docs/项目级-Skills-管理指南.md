@@ -51,7 +51,14 @@ ln -s ../.agents/skills .claude/skills
 
 跨会话信息必须写入计划文件，不能依赖上一段聊天记录。引导 Skill 自带的脚本默认只预览；必须显式添加 `--apply` 才会创建链接，并且遇到任何已有文件或冲突链接都会停止。
 
-也可以完全不全局安装引导 Skill：在项目 `AGENTS.md` 中注明先读取 `/Users/project/Github/skill/skills/project-skill-bootstrap/SKILL.md`。若希望任何新项目都能自然触发，可只把这一个体积很小的引导 Skill 作为全局例外。
+推荐把 `project-skill-bootstrap` 作为唯一全局例外常驻，这样任意新项目都能直接触发规划流程，无需先在项目内手动链接：
+
+```bash
+cd /Users/project/Github/skill
+./skills/project-skill-bootstrap/scripts/install-global-bootstrap.sh --apply
+```
+
+脚本会把原件链接到 `~/.cursor/skills/project-skill-bootstrap` 与 `~/.agents/skills/project-skill-bootstrap`。不要全局安装其他用户 Skill。若暂时不想全局安装，也可在项目 `AGENTS.md` 中注明先读取本仓库的 `skills/project-skill-bootstrap/SKILL.md`。
 
 ## 与现有全局软链接结合
 
