@@ -1,0 +1,21 @@
+# Project Skill Bootstrap for Cursor
+
+This project uses a central Skill library at `/Users/project/Github/skill`.
+
+When the user asks to start a new project, plan work, choose capabilities, migrate Skills, or prepare an agent handoff:
+
+1. Read `/Users/project/Github/skill/skills/project-skill-bootstrap/SKILL.md` completely.
+2. Follow its **Plan** phase first.
+3. Generate or update `.agents/skill-plan.md`.
+4. Do not install additional Skills during planning unless the user explicitly asks to apply an already approved plan.
+5. If applying an approved plan, use `/Users/project/Github/skill/skills/project-skill-bootstrap/scripts/link-skills.sh` and dry-run before `--apply`.
+
+Cursor Rules are not the Skill source of truth. The source of truth remains:
+
+- `/Users/project/Github/skill/SKILLS.md`
+- `/Users/project/Github/skill/skills/<name>/SKILL.md`
+
+Keep project Skill links local:
+
+- `.agents/skills/<name>` should point to `/Users/project/Github/skill/skills/<name>`.
+- `.claude/skills` should point to `../.agents/skills` when Claude Code compatibility is needed.

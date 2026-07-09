@@ -53,6 +53,16 @@ ln -s ../.agents/skills .claude/skills
 
 也可以完全不全局安装引导 Skill：在项目 `AGENTS.md` 中注明先读取 `/Users/project/Github/skill/skills/project-skill-bootstrap/SKILL.md`。若希望任何新项目都能自然触发，可只把这一个体积很小的引导 Skill 作为全局例外。
 
+## Cursor 项目接入
+
+Cursor 不直接消费 Codex Skill 列表，推荐用项目 Rules 引导它读取本仓库的 Skill 原件。当前仓库提供同步脚本：
+
+```bash
+/Users/project/Github/skill/scripts/sync-cursor-project-skill-bootstrap.sh --apply "$PWD"
+```
+
+它会为当前项目创建 `.cursor/rules/project-skill-bootstrap.mdc`、`.cursor/rules/project-skill-bootstrap/RULE.md`、`.cursor/skills/project-skill-bootstrap`、`.agents/skills/project-skill-bootstrap` 和 `.claude/skills`。详细说明见 `docs/Cursor-Skill-同步指南.md`。
+
 ## 与现有全局软链接结合
 
 本机原有配置并不需要一次性推倒重来。推荐采用平滑迁移：
