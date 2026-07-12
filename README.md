@@ -1,6 +1,6 @@
 # Skill Library
 
-这是个人使用的 Agent Skills 集中仓库，当前收录 34 个用户级 Skill。Skill 原件统一保存在 [`skills/`](skills/) 中；具体项目只通过软链接启用所需 Skill，避免全局安装过多 Skill 占用上下文并造成误触发。
+这是个人使用的 Agent Skills 集中仓库，当前收录 35 个用户级 Skill。Skill 原件统一保存在 [`skills/`](skills/) 中；具体项目只通过软链接启用所需 Skill，避免全局安装过多 Skill 占用上下文并造成误触发。
 
 ## 内容
 
