@@ -1,6 +1,6 @@
 # Skills 清单
 
-本仓库当前收录 34 个用户级 Skill。`本地`表示原先直接安装在 `~/.codex/skills`；`cc-switch` 表示原先由该目录中的软链接指向 `~/.cc-switch/skills`；`本仓库`表示迁移过程中创建并由本仓库维护。迁入本仓库后，`skills/<name>` 均为可独立使用的完整原件。
+本仓库当前收录 35 个用户级 Skill。`本地`表示原先直接安装在 `~/.codex/skills`；`cc-switch` 表示原先由该目录中的软链接指向 `~/.cc-switch/skills`；`本仓库`表示迁移过程中创建并由本仓库维护。迁入本仓库后，`skills/<name>` 均为可独立使用的完整原件。
 
 ## 搜索、浏览器与自动化
 
@@ -19,6 +19,7 @@
 | `docx` | 创建、读取和编辑 Word 文档 | cc-switch |
 | `internal-comms` | 编写状态报告、领导更新、FAQ、事故报告等内部沟通材料 | cc-switch |
 | `pdf` | 读取、生成、合并、拆分、OCR 和处理 PDF | cc-switch |
+| `ppt-master` | 从 PDF、DOCX、URL、Markdown 等来源生成原生可编辑 PowerPoint，并支持模板、动画、讲稿与图片生成工作流 | GitHub: hugohe3/ppt-master |
 | `pptx` | 创建、读取和编辑 PowerPoint 演示文稿 | cc-switch |
 | `xlsx` | 创建、读取、清洗和编辑 Excel、CSV、TSV 表格 | cc-switch |
 
