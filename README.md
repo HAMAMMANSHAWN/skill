@@ -20,4 +20,14 @@ ln -s ../.agents/skills /path/to/project/.claude/skills
 
 建议让 Agent 代为执行，并要求它在创建前检查目标是否已存在。
 
-新项目可以只启用 `project-skill-bootstrap`：它会先生成 `.agents/skill-plan.md`，待用户确认后再按需链接其他 Skill，并把执行提示留给下一个会话。
+## 全局例外：`project-skill-bootstrap`
+
+`project-skill-bootstrap` 是唯一建议常驻全局的 Skill，方便任意新项目直接触发规划流程。在本机执行：
+
+```bash
+./skills/project-skill-bootstrap/scripts/install-global-bootstrap.sh --apply
+```
+
+它会把该 Skill 链接到 `~/.cursor/skills/` 与 `~/.agents/skills/`。其他 Skill 仍按项目按需链接，不要全局安装。
+
+新项目可直接让 Agent 使用该引导 Skill：它会先生成 `.agents/skill-plan.md`，待用户确认后再按需链接其他 Skill，并把执行提示留给下一个会话。
