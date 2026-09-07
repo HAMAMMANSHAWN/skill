@@ -40,4 +40,4 @@ Describe the intended outcome and primary deliverables.
 
 ## Next-conversation prompt
 
-> Read `.agents/skill-plan.md` and the project instructions. If the plan status is `approved`, dry-run and apply exactly the required Skill links, verify them, mark the plan installed, and then execute the project goal using those Skills.
+> Read `.agents/skill-consultation.md` when it exists, then read `.agents/skill-plan.md` and the project instructions. If the plan status is `approved`, dry-run and apply exactly the required Skill links, verify them, mark the plan installed, and then execute the project goal using those Skills.

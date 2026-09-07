@@ -19,9 +19,10 @@ Cursor 有自己的 Skills 入口，也支持 Rules。为了让 Cursor 打开项
 .agents/skills/project-skill-bootstrap -> /Users/project/Github/skill/skills/project-skill-bootstrap
 .codex/skills -> ../.agents/skills
 .claude/skills -> ../.agents/skills
+AGENTS.md -> 保留原内容，并添加 project-skill-bootstrap 提示块
 ```
 
-脚本默认 dry-run；只有加 `--apply` 才会写入。遇到已有文件、目录或不同目标的软链接时会停止，不会覆盖。
+脚本默认 dry-run；只有加 `--apply` 才会写入。遇到已有文件、目录、不同目标的软链接，或不完整的引导提示块时会停止，不会覆盖。引导提示使新开或恢复后的项目对话都能重新发现该 Skill；已经运行且启动时未发现它的对话，需要先发送一条提示消息或新开对话。
 
 ## 新项目推荐流程
 

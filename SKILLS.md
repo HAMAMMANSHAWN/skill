@@ -1,6 +1,6 @@
 # Skills 清单
 
-本仓库当前收录 35 个用户级 Skill。`本地`表示原先直接安装在 `~/.codex/skills`；`cc-switch` 表示原先由该目录中的软链接指向 `~/.cc-switch/skills`；`本仓库`表示迁移过程中创建并由本仓库维护。迁入本仓库后，`skills/<name>` 均为可独立使用的完整原件。
+本仓库当前收录 38 个用户级 Skill。`本地`表示原先直接安装在 `~/.codex/skills`；`cc-switch` 表示原先由该目录中的软链接指向 `~/.cc-switch/skills`；`本仓库`表示迁移过程中创建并由本仓库维护。迁入本仓库后，`skills/<name>` 均为可独立使用的完整原件。
 
 ## 搜索、浏览器与自动化
 
@@ -10,6 +10,7 @@
 | `defuddle` | 从网页提取干净 Markdown，去除导航与页面杂质 | cc-switch |
 | `playwright` | 用真实浏览器执行导航、填表、截图、抓取和 UI 调试 | 本地 |
 | `webapp-testing` | 使用 Playwright 验证和调试本地 Web 应用 | cc-switch |
+| `youmind-file-reader` | 通过 YouMind OpenAPI 读取 board 文件、文档内容和视频转录 | 本仓库 |
 
 ## 文档、表格与演示
 
@@ -62,8 +63,10 @@
 
 | Skill | 用途 | 原来源 |
 | --- | --- | --- |
+| `codex-cursor-project-plan` | 让 Codex 为 Cursor 生成严格的项目架构、任务包、核心实现方向与验收标准 | 本仓库 |
+| `codex-cursor-review` | Cursor 完成实现后，让 Codex 按任务包、diff 和验证命令进行工程审查 | 本仓库 |
 | `mcp-builder` | 使用 Python 或 TypeScript 构建 MCP Server | cc-switch |
-| `project-skill-bootstrap` | 分析项目所需能力，生成跨会话计划，并在批准后安全创建项目级 Skill 链接 | 本仓库 |
+| `project-skill-bootstrap` | 保持项目级引导可发现，支持跨会话多轮 Skill 咨询、生成计划，并在批准后安全创建项目级链接 | 本仓库 |
 | `skill-creator` | 创建或更新高质量 Agent Skill | cc-switch |
 | `template` | Skill 目录占位模板，描述尚未填写，不建议直接启用 | cc-switch |
 

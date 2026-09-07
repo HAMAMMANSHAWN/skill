@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Cursor Review"
+  short_description: "Review Cursor-built code against Codex task packages"
+  default_prompt: "Use $codex-cursor-review to review the implementation Cursor just completed against the approved task package."

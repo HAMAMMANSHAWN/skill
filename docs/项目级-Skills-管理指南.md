@@ -43,6 +43,8 @@ ln -s ../.agents/skills .claude/skills
 
 > 把 `/Users/project/Github/skill/skills/pdf` 软链接到当前项目的 `.agents/skills/pdf`；如果 `.codex/skills` 或 `.claude/skills` 不存在，再创建指向 `../.agents/skills` 的软链接。不要覆盖已有文件。
 
+> 通用链接脚本位于 `/Users/project/Github/skill/skills/project-skill-bootstrap/scripts/link-skills.sh`，不在仓库根目录的 `scripts/` 中；根目录的同步脚本只负责初始化 `project-skill-bootstrap` 的跨工具入口。
+
 ## 用一个引导 Skill 冷启动
 
 如果项目一开始还不知道需要哪些 Skill，可以只启用 `project-skill-bootstrap`。它采用两段式流程：
@@ -53,6 +55,14 @@ ln -s ../.agents/skills .claude/skills
 4. 再开一个干净会话执行正式任务，使上下文只包含真正需要的 Skill。
 
 跨会话信息必须写入计划文件，不能依赖上一段聊天记录。引导 Skill 自带的脚本默认只预览；必须显式添加 `--apply` 才会创建链接，并且遇到任何已有文件或冲突链接都会停止。
+
+若希望引导能力在新开或恢复的项目对话中持续可发现，可运行：
+
+```bash
+/Users/project/Github/skill/skills/project-skill-bootstrap/scripts/ensure-project-skill-bootstrap.sh --apply "$PWD"
+```
+
+它会在保留现有 `AGENTS.md` 内容的前提下添加一个受标记保护的提示块；已在运行且启动时未发现该 Skill 的对话不能被追溯注入，需要先发送一条提示消息或新开对话。
 
 也可以完全不全局安装引导 Skill：在项目 `AGENTS.md` 中注明先读取 `/Users/project/Github/skill/skills/project-skill-bootstrap/SKILL.md`。若希望任何新项目都能自然触发，可只把这一个体积很小的引导 Skill 作为全局例外。
 
@@ -66,7 +76,7 @@ Cursor 不直接消费 Codex Skill 列表，推荐用项目 Rules 引导它读�
 /Users/project/Github/skill/scripts/sync-cursor-project-skill-bootstrap.sh --apply "$PWD"
 ```
 
-它会为当前项目创建 `.cursor/rules/project-skill-bootstrap.mdc`、`.cursor/rules/project-skill-bootstrap/RULE.md`、`.cursor/skills/project-skill-bootstrap`、`.agents/skills/project-skill-bootstrap`、`.codex/skills` 和 `.claude/skills`。详细说明见 `docs/Cursor-Skill-同步指南.md`。
+它会为当前项目创建 `.cursor/rules/project-skill-bootstrap.mdc`、`.cursor/rules/project-skill-bootstrap/RULE.md`、`.cursor/skills/project-skill-bootstrap`、`.agents/skills/project-skill-bootstrap`、`.codex/skills`、`.claude/skills`，并在 `AGENTS.md` 增加可重复执行的引导提示。详细说明见 `docs/Cursor-Skill-同步指南.md`。
 
 ## 与现有全局软链接结合
 

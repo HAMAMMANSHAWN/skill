@@ -1,6 +1,6 @@
 ---
 name: project-skill-bootstrap
-description: Use when starting a project with no Skills, listing available project Skills, choosing which Skills a project needs, installing named project-local Skills, migrating away from global Skills, or preparing a Skill handoff for a new conversation.
+description: Use when starting a project with no Skills, keeping project Skill discovery available across conversations, choosing project Skills through several consultation rounds, installing named project-local Skills, migrating away from global Skills, or preparing a Skill handoff.
 ---
 
 # Project Skill Bootstrap
@@ -10,12 +10,36 @@ Use `/Users/project/Github/skill` as the default library. Resolve another librar
 ## Choose the phase
 
 - **List**: Show available Skills from the central library so the user can choose.
+- **Ensure**: Keep this bootstrap Skill discoverable in the current project.
+- **Consult**: Collect and persist evolving needs before a formal plan.
 - **Plan**: Analyze and write `.agents/skill-plan.md`. Do not create or remove Skill links.
 - **Direct install**: Install one or more named Skills when the user's message explicitly asks to install/link/add/use those Skills in the current project.
 - **Apply**: Read an approved plan, verify it still fits the project, then create links.
 - **Audit**: Compare existing project links with the plan. Report drift before changing anything.
 
 Never combine planning and applying unless the user explicitly asks for both in the same conversation. A direct request such as "install `pdf`", "link `youmind-file-reader` to this project", or "use `playwright` in this project" is approval for those named Skills only; do not ask the user to repeat a fixed approval phrase.
+
+## Ensure
+
+When the user asks to keep `project-skill-bootstrap` available for future, new, or resumed work in a project, run:
+
+```bash
+<library>/skills/project-skill-bootstrap/scripts/ensure-project-skill-bootstrap.sh <project-root>
+```
+
+Review the dry run, then repeat with `--apply`. It creates only the bootstrap entrypoints for `.agents/skills`, Codex, Claude, and Cursor, plus a marked reminder block in the project's `AGENTS.md`. It never overwrites an existing file or different symlink.
+
+The project configuration affects conversations opened or resumed after the entrypoints are available. A conversation already running without this Skill cannot be retroactively given it; ask it to read the project `AGENTS.md` or start a new conversation.
+
+## Consult
+
+Use Consult when the user wants to describe needs over several turns before choosing Skills.
+
+1. Read `.agents/skill-consultation.md` when it exists, then read project instructions, existing project links, and `<library>/SKILLS.md`.
+2. Create the consultation file from `assets/skill-consultation-template.md` when absent. Update it after each material requirement or decision; do not rely on chat history.
+3. Keep recommendations in four groups: **enabled now**, **available in the central library**, **suggested to add to the library**, and **deferred or rejected**. State the reason and next action for each item.
+4. Never install, link, or import a recommendation during consultation. A library candidate becomes installable only after the user explicitly names it or approves a formal plan. A suggested external Skill remains a suggestion until the user separately authorizes adding it to the library.
+5. When the user says to generate a plan, use the accumulated consultation as input to **Plan**. When the user names a Skill to enable, use **Direct install**.
 
 ## List
 
@@ -29,7 +53,7 @@ When the user does not remember Skill names, asks what is available, or gives a 
 ## Plan
 
 1. Read project instructions and inspect representative files, dependencies, and intended deliverables.
-2. Read the library's `SKILLS.md`. Open individual `SKILL.md` files only when their summaries are insufficient to decide.
+2. Read `.agents/skill-consultation.md` when present, then read the library's `SKILLS.md`. Open individual `SKILL.md` files only when their summaries are insufficient to decide.
 3. Prefer the smallest sufficient set. Do not select a Skill merely because it might be useful someday.
 4. Separate **required now**, **conditional later**, and **rejected** candidates. Explain each choice in one sentence.
 5. Copy `assets/skill-plan-template.md` to `<project>/.agents/skill-plan.md` and fill every field.
@@ -42,7 +66,7 @@ The plan file is the cross-session handoff. Do not rely on chat history.
 
 1. Require `.agents/skill-plan.md` with `status: approved`. If absent or draft, stop and request approval.
 2. Confirm every selected Skill exists under `<library>/skills/<name>/SKILL.md`.
-3. Run `scripts/link-skills.sh <project-root> <skill>...` without `--apply` and review the dry run.
+3. Run `<library>/skills/project-skill-bootstrap/scripts/link-skills.sh <project-root> <skill>...` without `--apply` and review the dry run.
 4. Run the same command with `--apply` only when the dry run matches the approved plan.
 5. Verify every link and ensure `.codex/skills` and `.claude/skills` point to `../.agents/skills` when those entries were absent.
 6. Set the plan to `status: installed`, record the installation date, and add verification results.
@@ -58,7 +82,7 @@ Use this phase when the user explicitly names one or more Skills and asks to ins
 2. Confirm every requested Skill exists under `<library>/skills/<name>/SKILL.md`.
 3. If `.agents/skill-plan.md` is absent, create it with `status: approved`, recording the requested Skills under **Required now** and the user's request as the approval basis. If the template asset is unavailable, write the same frontmatter and sections manually.
 4. If `.agents/skill-plan.md` exists, add only the requested approved Skills; do not remove or silently install conditional Skills.
-5. Run `scripts/link-skills.sh <project-root> <skill>...` without `--apply`. If the script is unavailable, perform the equivalent safe symlink dry run manually.
+5. Run `<library>/skills/project-skill-bootstrap/scripts/link-skills.sh <project-root> <skill>...` without `--apply`. If the script is unavailable, perform the equivalent safe symlink dry run manually.
 6. Apply only if the dry run targets the requested Skills and would not overwrite anything. Use the script with `--apply` when available; otherwise create equivalent project-local symlinks safely.
 7. Mark the plan `status: installed`, record `installed_at`, and add verification results.
 

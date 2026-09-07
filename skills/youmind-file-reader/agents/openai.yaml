@@ -1,0 +1,4 @@
+interface:
+  display_name: "YouMind File Reader"
+  short_description: "Read YouMind board files and transcripts"
+  default_prompt: "Use $youmind-file-reader to retrieve and summarize a YouMind file from a board URL or file ID."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Cursor Project Plan"
+  short_description: "Generate strict Cursor execution packages for projects"
+  default_prompt: "Use $codex-cursor-project-plan to turn this project direction into strict Cursor implementation docs."
